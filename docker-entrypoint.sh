@@ -8,5 +8,5 @@ if [ -n "$NODE_VERSION" ]; then
   nvm install "$NODE_VERSION"
   nvm use "$NODE_VERSION"
 fi
-
+python3 -m pip install uv --break-system-packages
 exec /usr/local/bin/mcp-auth-proxy "$@"
