@@ -15,9 +15,9 @@ RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH \
 FROM debian:bookworm-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates curl python3 python3-pip git nodejs npm \
+    ca-certificates curl python3 python3-pip pipx git nodejs npm \
     && rm -rf /var/lib/apt/lists/* \
-    curl -LsSf https://astral.sh/uv/install.sh | sh
+    pipx upgrade uv
 
 # nvm lets NODE_VERSION select a Node.js version at container startup.
 # Left unset, the apt-installed nodejs/npm above are used (legacy/bundled behavior).
