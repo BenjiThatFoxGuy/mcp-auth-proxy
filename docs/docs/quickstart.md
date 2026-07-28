@@ -57,6 +57,8 @@ docker run --rm --net=host \
   npx -y @modelcontextprotocol/server-filesystem ./
 ```
 
+The Docker image bundles a default Node.js/npm for running `npx`-based backends. To use a different version, set `NODE_VERSION` (e.g. `-e NODE_VERSION=20`) — the entrypoint installs it via [nvm](https://github.com/nvm-sh/nvm) on startup. See [Docker Image Options](./configuration.md#docker-image-options).
+
 ## Configuration Options
 
 ### Transport Types

@@ -51,6 +51,8 @@ services:
       - OIDC_ALLOWED_ATTRIBUTES=/groups=admin,/department=engineering
       - OIDC_ALLOWED_ATTRIBUTES_GLOB=/groups=*-admins
       - TRUSTED_PROXIES=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+      # Optional: pin the Node.js version used for `npx` backends (installed via nvm on startup)
+      - NODE_VERSION=20
     volumes:
       - ./data:/data
     command: ["npx", "-y", "@modelcontextprotocol/server-filesystem", "./"]

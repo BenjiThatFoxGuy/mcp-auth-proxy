@@ -158,6 +158,16 @@ openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048
 | `--tls-listen` | `TLS_LISTEN`         | `:443`   | Address to listen on for TLS |
 | `--data-path`  | `DATA_PATH`          | `./data` | Path to the data directory   |
 
+### Docker Image Options
+
+These options are handled by the Docker image's entrypoint script, not by the `mcp-auth-proxy` binary itself, so they only apply when running via Docker.
+
+| Environment Variable | Default             | Description                                                                                          |
+| -------------------- | ------------------- | ---------------------------------------------------------------------------------------------------- |
+| `NODE_VERSION`       | - (bundled Node.js) | Node.js version to install and use via [nvm](https://github.com/nvm-sh/nvm), e.g. `20` or `20.11.1`. |
+
+Left unset, the image falls back to the Node.js/npm bundled in the image at build time. When set, the entrypoint installs the requested version with `nvm` on container startup (nvm resolves partial versions like `20` to the latest matching release) before starting `mcp-auth-proxy`. This only affects the `npx`/`node` binaries used to launch a stdio MCP server backend.
+
 ### Repository Options
 
 | Option                 | Environment Variable | Default | Description                                                                                                           |
