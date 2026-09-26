@@ -39,8 +39,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=latest,enable=${{ github.event_name != 'release' && github.ref == 'refs/heads/main' }}
-            type=raw,value=nightly,enable=${{ github.event_name != 'release' && github.ref != 'refs/heads/main' }}
+            type=raw,value=nightly,enable=${{ startsWith(github.ref, 'refs/heads/') }}
             type=ref,event=tag
             type=semver,pattern={{version}},enable=${{ github.event_name == 'release' && github.event.action == 'published' }}
             type=semver,pattern={{major}}.{{minor}},enable=${{ github.event_name == 'release' && github.event.action == 'published' }}
