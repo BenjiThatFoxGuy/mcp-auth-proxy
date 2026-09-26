@@ -190,4 +190,14 @@ openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048
 | `--http-streaming-only`         | `HTTP_STREAMING_ONLY`         | `false`     | Reject SSE (GET) requests and keep the backend operating in HTTP streaming-only mode                  |
 | `--trusted-proxies`             | `TRUSTED_PROXIES`             | -           | Comma-separated list of trusted proxies (IP addresses or CIDR ranges)                                 |
 
+### Docker Image Options
+
+These apply only to the Docker image, and are read by its entrypoint script before the proxy starts.
+
+| Environment Variable | Default | Description                                                                                                                |
+| -------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `NODE_VERSION`       | `22`    | Node.js major version put on `PATH` (via `nvm use`) for stdio MCP servers. Bundled versions: `16`, `18`, `20`, `22`, `24`. |
+
+The container fails to start if the requested version isn't bundled or `node` on `PATH` does not resolve to it.
+
 For practical configuration examples including environment variables, Docker Compose, and Kubernetes deployments, see the [Configuration Examples](./examples.md) page.
