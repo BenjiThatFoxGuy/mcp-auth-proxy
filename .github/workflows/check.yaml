@@ -9,8 +9,8 @@ on:
       - main
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event_name == 'release' && github.ref || 'ci' }}
+  cancel-in-progress: ${{ github.event_name != 'release' }}
 
 jobs:
   check:
