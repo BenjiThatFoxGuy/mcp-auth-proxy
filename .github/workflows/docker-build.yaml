@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - "**"
   release:
     types: [published]
 
@@ -38,13 +38,15 @@ jobs:
         uses: docker/metadata-action@v6
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          flavor: |
+            latest=false
           tags: |
-            type=ref,event=branch
+            type=raw,value=latest,enable=${{ github.event_name != 'release' && github.ref == 'refs/heads/main' }}
+            type=raw,value=nightly,enable=${{ github.event_name != 'release' && github.ref != 'refs/heads/main' }}
             type=ref,event=tag
             type=semver,pattern={{version}},enable=${{ github.event_name == 'release' && github.event.action == 'published' }}
             type=semver,pattern={{major}}.{{minor}},enable=${{ github.event_name == 'release' && github.event.action == 'published' }}
             type=semver,pattern={{major}},enable=${{ github.event_name == 'release' && github.event.action == 'published' }}
-            type=raw,value=latest,enable=${{ github.event_name == 'release' && github.event.action == 'published' }}
 
       - name: Build and push Docker image
         id: build-and-push
