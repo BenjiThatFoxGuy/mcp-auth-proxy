@@ -39,6 +39,21 @@ That's it! Your HTTP endpoint is now available at `https://{your-domain}/mcp`.
 
 > Already have certificates? Pass `--tls-cert-file` and `--tls-key-file` instead of `--tls-accept-tos`.
 
+### Docker
+
+```sh
+docker run --rm --net=host \
+  -e EXTERNAL_URL=https://{your-domain} \
+  -e TLS_ACCEPT_TOS=1 \
+  -e PASSWORD=changeme \
+  -e NODE_VERSION=22 \
+  -v ./data:/data \
+  ghcr.io/sigbit/mcp-auth-proxy:latest \
+  -- npx -y @modelcontextprotocol/server-filesystem ./
+```
+
+The image ships Node.js 16, 18, 20, 22 and 24 via nvm. `NODE_VERSION` (default `22`) selects which one is on `PATH` for stdio MCP servers at container startup.
+
 ## Why not MCP Gateway?
 
 mcp-auth-proxy: **A lightweight proxy that adds authentication to any MCP server** (optional stdio→HTTP(S) conversion)  

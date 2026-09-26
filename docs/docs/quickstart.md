@@ -57,6 +57,8 @@ docker run --rm --net=host \
   npx -y @modelcontextprotocol/server-filesystem ./
 ```
 
+The Docker image bundles Node.js 16, 18, 20, 22 and 24 via nvm. Set `-e NODE_VERSION=18` (default `22`) to choose which one stdio MCP servers run under. See [Docker Image Options](./configuration.md#docker-image-options).
+
 ## Configuration Options
 
 ### Transport Types
