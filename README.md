@@ -32,6 +32,15 @@ If you use stdio transport
   -- npx -y @modelcontextprotocol/server-filesystem ./
 ```
 
+```sh
+# or, for a Python-based MCP server via uv/uvx
+./mcp-auth-proxy \
+  --external-url https://{your-domain} \
+  --tls-accept-tos \
+  --password changeme \
+  -- uvx mcp-server-git --repository .
+```
+
 That's it! Your HTTP endpoint is now available at `https://{your-domain}/mcp`.
 
 - stdio (when a command is specified): MCP endpoint is https://{your-domain}/mcp.
@@ -53,6 +62,10 @@ docker run --rm --net=host \
 ```
 
 The image ships Node.js 16, 18, 20, 22 and 24 via nvm. `NODE_VERSION` (default `22`) selects which one is on `PATH` for stdio MCP servers at container startup.
+
+The image also ships `uv`/`uvx` (installed via the official Astral installer) on `PATH`, so Python-based MCP servers can be launched directly, e.g. `-- uvx mcp-server-git --repository .`.
+
+The image also includes `git`, since some MCP servers (e.g. `mcp-server-git`) shell out to it or need it to clone repositories.
 
 ## Why not MCP Gateway?
 

@@ -200,4 +200,6 @@ These apply only to the Docker image, and are read by its entrypoint script befo
 
 The container fails to start if the requested version isn't bundled or `node` on `PATH` does not resolve to it.
 
+`uv` and `uvx` are also available on `PATH` in the image (no environment variable needed — only a single current version is bundled).
+
 For practical configuration examples including environment variables, Docker Compose, and Kubernetes deployments, see the [Configuration Examples](./examples.md) page.

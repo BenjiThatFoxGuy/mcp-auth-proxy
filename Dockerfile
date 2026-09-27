@@ -15,7 +15,7 @@ RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH \
 FROM debian:bookworm-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates curl python3 python3-pip \
+    ca-certificates curl git python3 python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
 ENV NVM_DIR=/usr/local/nvm
@@ -26,6 +26,9 @@ RUN mkdir -p "$NVM_DIR" \
     && for v in 16 18 20 22 24; do nvm install "$v"; done \
     && nvm alias default 22 \
     && nvm cache clear
+
+ENV UV_INSTALL_DIR=/usr/local/bin
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 COPY --from=builder /app/bin/main /usr/local/bin/mcp-auth-proxy
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
