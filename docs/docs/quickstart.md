@@ -70,6 +70,8 @@ The Docker image bundles Node.js 16, 18, 20, 22 and 24 via nvm. Set `-e NODE_VER
 
 The image also bundles `uv`/`uvx` on `PATH` for Python-based MCP servers — no extra environment variable is needed since only one version is shipped.
 
+The image also includes `git`, since some MCP servers (e.g. `mcp-server-git`) shell out to it or need it to clone repositories.
+
 ## Configuration Options
 
 ### Transport Types

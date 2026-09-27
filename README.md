@@ -65,6 +65,8 @@ The image ships Node.js 16, 18, 20, 22 and 24 via nvm. `NODE_VERSION` (default `
 
 The image also ships `uv`/`uvx` (installed via the official Astral installer) on `PATH`, so Python-based MCP servers can be launched directly, e.g. `-- uvx mcp-server-git --repository .`.
 
+The image also includes `git`, since some MCP servers (e.g. `mcp-server-git`) shell out to it or need it to clone repositories.
+
 ## Why not MCP Gateway?
 
 mcp-auth-proxy: **A lightweight proxy that adds authentication to any MCP server** (optional stdio→HTTP(S) conversion)  
