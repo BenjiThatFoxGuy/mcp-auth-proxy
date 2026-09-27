@@ -27,6 +27,9 @@ RUN mkdir -p "$NVM_DIR" \
     && nvm alias default 22 \
     && nvm cache clear
 
+ENV UV_INSTALL_DIR=/usr/local/bin
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+
 COPY --from=builder /app/bin/main /usr/local/bin/mcp-auth-proxy
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh

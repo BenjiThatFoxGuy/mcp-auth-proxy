@@ -45,6 +45,15 @@ The simplest setup uses password authentication:
   -- npx -y @modelcontextprotocol/server-filesystem ./
 ```
 
+```bash
+# or, for a Python-based MCP server via uv/uvx
+./mcp-auth-proxy \
+  --external-url https://{your-domain} \
+  --tls-accept-tos \
+  --password your-secure-password \
+  -- uvx mcp-server-git --repository .
+```
+
 ### With Docker
 
 ```bash
@@ -58,6 +67,8 @@ docker run --rm --net=host \
 ```
 
 The Docker image bundles Node.js 16, 18, 20, 22 and 24 via nvm. Set `-e NODE_VERSION=18` (default `22`) to choose which one stdio MCP servers run under. See [Docker Image Options](./configuration.md#docker-image-options).
+
+The image also bundles `uv`/`uvx` on `PATH` for Python-based MCP servers — no extra environment variable is needed since only one version is shipped.
 
 ## Configuration Options
 
